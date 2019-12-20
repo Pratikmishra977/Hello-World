@@ -3,7 +3,7 @@ import time
 import sys
 from selenium import webdriver
 
-br= webdriver.Chrome(executable_path='C:/Users/admin/chromedriver')
+br= webdriver.Chrome(executable_path='C:/Users/admin/chromedriver') # location of the chrome driver
 def get_captcha():
 	captcha_id = input('Enter the captcha code:')
 	return captcha_id
@@ -16,9 +16,9 @@ def login(DL_Number , dob ):
 	cap_id = br.find_element_by_xpath('//*[@id="form_rcdl:j_idt29:CaptchaID"]')
 	cap_id.send_keys(get_captcha())
 	br.find_element_by_xpath('//*[@id="form_rcdl:j_idt39"]').click()
-	time.sleep(5)
+	time.sleep(3) # wait for site to load completely 
 	try:
-		msg = br.find_element_by_xpath('//*[@id="form_rcdl:j_idt13"]/div/ul/li/span[1]').text
+		msg = br.find_element_by_xpath('//*[@id="form_rcdl:j_idt13"]/div/ul/li/span[1]').text # captcha error message
 		print(msg)
 		return None
 	except:
@@ -33,6 +33,7 @@ def login(DL_Number , dob ):
 DL_Number = input("Enter the Driving Licence Number:")
 dob = input("DOB (dd-mm-yyyy):")
 result = login(DL_Number, dob)
+# Try untill the captcha matches
 while result is None:
 	result = login(DL_Number, dob)
 
