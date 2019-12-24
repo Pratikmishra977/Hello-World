@@ -36,6 +36,5 @@ result = login(DL_Number, dob)
 # Try untill the captcha matches
 while result is None:
 	result = login(DL_Number, dob)
-
 print(result)
 
